@@ -1,0 +1,58 @@
+﻿@model WebApplication2.Models.Admindetails
+@{
+    ViewBag.Title = "SelectAdmiqforuser";
+    Layout = "~/Views/Shares/_LayoutPage2.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>adminview</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="jumbotron">
+        <div class="alert-success">@ViewBag.Message</div>
+        @using (Html.BeginForm("SelectAdmiqforuser", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            @Html.ValidationSummary(true, "Registeration Failed, fields.");
+            <div id="signupalert" style="display:none" class="alert alert-danger">
+                <p>Error:</p>
+                <span></span>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="Crqa2" class="col-md-3 control-label">Choose your Question</label>
+                
+                <div class="col-md-9">
+                    @*@Html.DropDownList("ddlcountry", Model.Usersqlist1, new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.AdminSq, Model.Adminsqlist, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.AdminSqaslbl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.AdminSqaslbl, "", new { @class = "text-danger" })
+
+                </div>
+
+
+
+            </div>
+
+            <div class="form-group">
+                <!-- Button -->
+                <div class="col-md-offset-3 col-md-9">
+                    @*<button id="btn-signup" value="Signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>*@
+                    <input type="submit" value="Update" name="Command" class="btn btn-default" />
+                    <span style="margin-left:8px;"></span>
+                </div>
+            </div>
+
+        }
+   </div>
+</body>
+</html>
+
+

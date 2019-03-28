@@ -1,0 +1,133 @@
+﻿@model WebApplication2.Models.userinffrpwdrst
+@{
+    ViewBag.Title = "SampleadminView";
+    Layout = "~/Views/Shares/_LayoutPage5.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        Black Dashboard by Creative Tim
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="~/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="~/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/assets/demo/demo.css" rel="stylesheet" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#selectauth").on("change", function () {
+                if (this.value == "1") {
+                    $("#smsotp").show();
+                    $("#emailotp").hide();
+                }
+                else {
+                    $("#smsotp").hide();
+                    $("#emailotp").show();
+                }
+            });
+        });
+      
+    </script>
+  
+</head>
+
+<body>
+
+    @*@using (Html.BeginForm("authforpswdreset1", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {*@
+    @*@Html.AntiForgeryToken()*@
+    <div class="content">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+
+                        <h5 style="font-size:x-large; font:bold"> Welcome @Model.username </h5>
+                        <hr color=red>
+                        <h5 class="title">Select Authentication Type</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            @if (ViewBag.Message == "Error")
+                            {
+                                <div class="alert alert-danger">
+                                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                        <i class="tim-icons icon-simple-remove"></i>
+                                    </button>
+                                    <span>
+                                        <b> Choose an authentication option </b>
+                                    </span>
+
+                                </div>
+                            }
+                            <div class="row">
+                                <div class="col-md-5 pr-md-1">
+                                    <div class="form-group">
+                                        <select class="form-control" id="selectauth">
+                                            <option value="0">Email</option>
+                                            <option value="1">phone</option>
+
+                                        </select>
+
+
+                                        @*// @Html.DropDownListFor(model => model.selecttedans, Model.Authoptions, new { @class = "form-control" })*@
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row" id="smsotp" style='display:none;'>
+                                <div class="col-md-5 pr-md-1">
+                                    <div class="form-group">
+                                        <label>OTP sent to the registered mobile @Model.phone</label>
+                                        @*<i class="tim-icons icon-mobile"></i>*@
+                                        <label>Enter OTP Here</label>
+                                        @Html.TextBoxFor(m => m.smsotp, "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="row" id="emailotp" style='display:none;'>
+                                <div class="col-md-5 pr-md-1">
+                                    <div class="form-group">
+                                        <label>OTP sent to the registered email @Model.email 
+                                         <input type="submit" value="Send OTP" class="btn btn-fill btn-primary"> 
+                                        </label>
+                                       
+                                        <label>Enter OTP Here</label>
+                                        @Html.TextBoxFor(m => m.emailotp, "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        @*<button type="submit" class="btn btn-fill btn-primary">Save</button>*@
+                        <!-- Button -->
+                        <div class="col-sm-12 controls">
+                            @*<a id="btn-login" href="#" class="btn btn-success">Login  </a>*@
+                            <input type="submit" value="Next" name="Command" class="btn btn-fill btn-primary" />
+                            <a id="btn-fblogin" href="~/Home/Forgotpassword" class="btn btn-fill btn-primary">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*}*@
+
+</body>
+</html>

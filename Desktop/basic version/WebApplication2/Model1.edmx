@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="paresetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admininfo">
+          <Key>
+            <PropertyRef Name="aid" />
+          </Key>
+          <Property Name="aid" Type="int" Nullable="false" />
+          <Property Name="adminname" Type="nvarchar" MaxLength="100" />
+          <Property Name="adminpass" Type="nvarchar" MaxLength="100" />
+          <Property Name="adminsq" Type="int" Nullable="false" />
+          <Property Name="dmainname" Type="nvarchar" MaxLength="100" />
+          <Property Name="domainip" Type="nvarchar" MaxLength="100" />
+          <Property Name="serveradminname" Type="nvarchar" MaxLength="100" />
+          <Property Name="serveradminpass" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'pareset.dbo.authopt' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="authopt">
+          <Property Name="emailsms" Type="bit" />
+          <Property Name="mobileotp" Type="bit" />
+          <Property Name="challengingqa" Type="bit" />
+          <Property Name="option1" Type="bit" />
+          <Property Name="option2" Type="bit" />
+        </EntityType>-->
+        <EntityType Name="Chresqlist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Adminsqlist" Type="nvarchar" MaxLength="250" />
+          <Property Name="Usersqlist" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Pwdpolicy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Pwdpolicy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Isenabel" Type="bit" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="useraudit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" />
+          <Property Name="paswordchangedate" Type="date" />
+          <Property Name="ipaddress" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Userauthoptions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Authoptions" Type="varchar" MaxLength="100" />
+          <Property Name="Isenabel" Type="bit" />
+          <Property Name="Rblabell" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Userinfo">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="150" />
+          <Property Name="password" Type="nvarchar" MaxLength="150" />
+          <Property Name="email" Type="nvarchar" MaxLength="150" />
+          <Property Name="phone" Type="nvarchar" MaxLength="150" />
+          <Property Name="adminq" Type="int" />
+          <Property Name="ansforaq" Type="nvarchar" MaxLength="150" />
+          <Property Name="userq" Type="int" />
+          <Property Name="ansforuq" Type="nvarchar" MaxLength="150" />
+          <Property Name="uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="passwordsalt" Type="nvarchar" MaxLength="150" />
+          <Property Name="AdminApproved" Type="bit" />
+          <Property Name="failurecount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersinAD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="150" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Isregistered" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="paresetModelStoreContainer">
+          <EntitySet Name="Admininfo" EntityType="Self.Admininfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chresqlist" EntityType="Self.Chresqlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pwdpolicy" EntityType="Self.Pwdpolicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="useraudit" EntityType="Self.useraudit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Userauthoptions" EntityType="Self.Userauthoptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Userinfo" EntityType="Self.Userinfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersinAD" EntityType="Self.UsersinAD" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="paresetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admininfo">
+          <Key>
+            <PropertyRef Name="aid" />
+          </Key>
+          <Property Name="aid" Type="Int32" Nullable="false" />
+          <Property Name="adminname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="adminpass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="adminsq" Type="Int32" Nullable="false" />
+          <Property Name="dmainname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="domainip" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="serveradminname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="serveradminpass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Chresqlist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Adminsqlist" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Usersqlist" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Pwdpolicy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Pwdpolicy1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Isenabel" Type="Boolean" Nullable="false" />
+          <Property Name="Label" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="useraudit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="paswordchangedate" Type="DateTime" Precision="0" />
+          <Property Name="ipaddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Userauthoption">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Authoptions" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isenabel" Type="Boolean" />
+          <Property Name="Rblabell" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Userinfo">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="adminq" Type="Int32" />
+          <Property Name="ansforaq" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="userq" Type="Int32" />
+          <Property Name="ansforuq" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="passwordsalt" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AdminApproved" Type="Boolean" />
+          <Property Name="failurecount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersinAD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Isregistered" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="paresetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admininfoes" EntityType="Self.Admininfo" />
+          <EntitySet Name="Chresqlists" EntityType="Self.Chresqlist" />
+          <EntitySet Name="Pwdpolicies" EntityType="Self.Pwdpolicy" />
+          <EntitySet Name="useraudits" EntityType="Self.useraudit" />
+          <EntitySet Name="Userauthoptions" EntityType="Self.Userauthoption" />
+          <EntitySet Name="Userinfoes" EntityType="Self.Userinfo" />
+          <EntitySet Name="UsersinADs" EntityType="Self.UsersinAD" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="paresetModelStoreContainer" CdmEntityContainer="paresetEntities">
+          <EntitySetMapping Name="Admininfoes">
+            <EntityTypeMapping TypeName="paresetModel.Admininfo">
+              <MappingFragment StoreEntitySet="Admininfo">
+                <ScalarProperty Name="aid" ColumnName="aid" />
+                <ScalarProperty Name="adminname" ColumnName="adminname" />
+                <ScalarProperty Name="adminpass" ColumnName="adminpass" />
+                <ScalarProperty Name="adminsq" ColumnName="adminsq" />
+                <ScalarProperty Name="dmainname" ColumnName="dmainname" />
+                <ScalarProperty Name="domainip" ColumnName="domainip" />
+                <ScalarProperty Name="serveradminname" ColumnName="serveradminname" />
+                <ScalarProperty Name="serveradminpass" ColumnName="serveradminpass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chresqlists">
+            <EntityTypeMapping TypeName="paresetModel.Chresqlist">
+              <MappingFragment StoreEntitySet="Chresqlist">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Adminsqlist" ColumnName="Adminsqlist" />
+                <ScalarProperty Name="Usersqlist" ColumnName="Usersqlist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pwdpolicies">
+            <EntityTypeMapping TypeName="paresetModel.Pwdpolicy">
+              <MappingFragment StoreEntitySet="Pwdpolicy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Pwdpolicy1" ColumnName="Pwdpolicy" />
+                <ScalarProperty Name="Isenabel" ColumnName="Isenabel" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="useraudits">
+            <EntityTypeMapping TypeName="paresetModel.useraudit">
+              <MappingFragment StoreEntitySet="useraudit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="paswordchangedate" ColumnName="paswordchangedate" />
+                <ScalarProperty Name="ipaddress" ColumnName="ipaddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Userauthoptions">
+            <EntityTypeMapping TypeName="paresetModel.Userauthoption">
+              <MappingFragment StoreEntitySet="Userauthoptions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Authoptions" ColumnName="Authoptions" />
+                <ScalarProperty Name="Isenabel" ColumnName="Isenabel" />
+                <ScalarProperty Name="Rblabell" ColumnName="Rblabell" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Userinfoes">
+            <EntityTypeMapping TypeName="paresetModel.Userinfo">
+              <MappingFragment StoreEntitySet="Userinfo">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="adminq" ColumnName="adminq" />
+                <ScalarProperty Name="ansforaq" ColumnName="ansforaq" />
+                <ScalarProperty Name="userq" ColumnName="userq" />
+                <ScalarProperty Name="ansforuq" ColumnName="ansforuq" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="passwordsalt" ColumnName="passwordsalt" />
+                <ScalarProperty Name="AdminApproved" ColumnName="AdminApproved" />
+                <ScalarProperty Name="failurecount" ColumnName="failurecount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersinADs">
+            <EntityTypeMapping TypeName="paresetModel.UsersinAD">
+              <MappingFragment StoreEntitySet="UsersinAD">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Isregistered" ColumnName="Isregistered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

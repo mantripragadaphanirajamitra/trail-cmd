@@ -1,0 +1,109 @@
+﻿@model WebApplication2.Models.OTPValidater
+
+@{
+    ViewBag.Title = "SampleadminView";
+    Layout = "~/Views/Shares/_LayoutPage5.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        Black Dashboard by Creative Tim
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="~/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="~/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/assets/demo/demo.css" rel="stylesheet" />
+</head>
+<body>
+    @using (Html.BeginForm("smsotp", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+       
+        <div class="content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 style="font-size:x-large; font:bold"> Welcome @Model.username </h5>
+                            <hr color=red>
+                            <h5 class="title"> Validate OTP</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                @if (ViewBag.Message == "Success")
+                                {
+                                    <div class="alert alert-success">
+                                        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>
+                                        <span>
+                                            <b>Successfully sent an OTP to the entered mobile number</b>
+                                        </span>
+                                    </div>
+                                }
+                                @if (ViewBag.Message == "Error1")
+                                {
+                                    <div class="alert alert-danger">
+                                        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>
+                                        <span>
+                                            <b>Enter the valid OTP</b>
+                                        </span>
+                                    </div>
+                                }
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <i class="tim-icons icon-mobile"></i>
+                                            <label>Enter your OTP here and click next</label>
+                                            @Html.TextBoxFor(m => m.otpstring, "", new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            @*<button type="submit" class="btn btn-fill btn-primary">Save</button>*@
+
+                            <!-- Button -->
+
+                            <div class="col-sm-12 controls">
+                                @*<a id="btn-login" href="#" class="btn btn-success">Login  </a>*@
+                                <input type="submit" name="Command" value="Next" class="btn btn-fill btn-primary" />
+                                <a id="btn-fblogin" href="~/Home/Forgotpassword" class="btn btn-fill btn-primary">Back</a>
+
+
+                            </div>
+                            @*<div class="col-sm-12 controls">
+                                <a id="btn-fblogin" href="~/Home/Signup" class="btn btn-fill btn-primary"> Sign Up</a>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "GetADusers";
+    Layout = "~/Views/Shares/_LayoutPage2.cshtml";
+}
+
+<h2>GetADusers</h2>
+<div class="table-responsive">
+    <table class="table table-striped" >
+       
+         <tr>   
+        <th>UserID</th>
+        <th>Email</th>
+        <th>UserName</th>
+        <th>DisplayName</th>
+        <th>Isregestered</th>
+         </tr>
+       
+        @foreach (var item in ViewBag.userdetails)
+        {
+
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @item.DisplayName
+                </td>
+                <td>
+                    @item.Isregistered
+                </td>
+            </tr>
+
+        }
+
+    </table>
+</div>  

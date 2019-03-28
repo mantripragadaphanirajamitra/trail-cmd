@@ -1,0 +1,174 @@
+﻿
+
+@{
+    ViewBag.Title = "SampleadminView";
+    Layout = "~/Views/Shares/_LayoutPage3.cshtml";
+}
+
+@model WebApplication2.Models.Enableusr
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        Black Dashboard by Creative Tim
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="~/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="~/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/assets/demo/demo.css" rel="stylesheet" />
+    
+      
+</head>
+<body>
+
+    <div class="content">
+        @using (Html.BeginForm("EnableUser", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="title">Enable User</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            
+                            <div class="alert alert-danger" id="errorid" style='display:none;'>
+                                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                    <i class="tim-icons icon-simple-remove"></i>
+                                </button>
+                                <span id="spanid">
+                                    <b>User does not Exist</b>
+                                </span>
+                            </div>
+                          
+                            <div class="row">
+
+                                <div class="col-md-7 px-md-10">
+                                    <div class="form-group">
+                                        <i class="tim-icons icon-single-02"></i>
+                                        <label>User Name</label>
+                                        @Html.TextBoxFor(m => m.username, new { @class = "form-control", id = "MyId" })
+                                        @*<input type="text" class="form-control" placeholder="Username" value="michael23">*@
+                                    </div>
+                                </div>
+                                <button type="button" id="display" class="btn btn-fill btn-primary">Get</button>
+
+                            </div>
+                            <div class="row" id="displayusr" style='display:none;'>
+                                <div class="col-md-7 px-md-10">
+                                    <div class="form-group">
+                                        <i class="tim-icons icon-laptop"></i>
+                                        <label>Failure Count</label>
+                                        @Html.TextBoxFor(m => m.failuredis, new { @class = "form-control", id = "count" })
+                                        @*<input type="text" class="form-control" placeholder="Company" value="Mike">*@
+                                    </div>
+                                </div>
+                                <div class="col-md-7 px-md-10">
+                                    <div class="form-group">
+                                        <label class="col-6">Unblock Account</label>
+
+                                        @Html.CheckBoxFor(m => m.failurecount, new { htmlAttributes = new { @class = "form-check-input", id = "unblock" } })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-7 px-md-10">
+                                    <div class="form-group">
+                                        <label class="col-6">Admin Approve</label>
+
+                                        @Html.CheckBoxFor(m => m.adminapproved, new { htmlAttributes = new { @class = "form-check-input", id = "approve" } })
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        @*<button type="submit" class="btn btn-fill btn-primary">Update</button>*@
+                        <input type="submit" value="Update" name="Command" class="btn btn-fill btn-primary" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $("#display").click(function () {
+        //        $("#displayusr").show();
+
+        //    });
+        //});
+
+        $(function () {
+            $("#display").click(function () {
+                var enableusr = new Object();
+                enableusr.username = $('#MyId').val();
+               
+
+                if (enableusr != null) {
+                   
+                    $.ajax({
+                        
+                        type: "POST",
+                        url: "/Home/GetUsrEnbledt",
+                        data: JSON.stringify(enableusr),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                           
+                            if (response != null) {
+                                
+                                if (response.errormsg == 'Success') {
+
+
+                                    $("#displayusr").show();
+                                    $('#count').val([response.failuredis]);
+                                    $('#unblock').attr('checked', false);
+                                    $('#approve').attr('checked', response.adminapproved);
+                                    $("#errorid").hide();
+                                    //alert("Name : " + response.username + ", Designation : " + response.failurecount + ", Location :" + response.adminapproved);
+                                }
+                                else {
+                                    $("#displayusr").hide();
+                                    $("#errorid").show();
+                                }
+                            }
+                            else {
+                                alert("Something went wrong");
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                }
+            });
+         
+        });
+
+    </script>
+
+</body>
+
+</html>

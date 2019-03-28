@@ -1,0 +1,136 @@
+﻿
+
+<!DOCTYPE html>
+@model IEnumerable<Userinfo>
+
+@{
+    Layout = null;
+    WebGrid webGrid = new WebGrid(source: Model, canPage: true, canSort: false);
+}
+<html>
+
+@{
+    ViewBag.Title = "SampleDb";
+    Layout = "~/Views/Shares/_LayoutPage3.cshtml";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        Black Dashboard by Creative Tim
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="~/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="~/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/assets/demo/demo.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Fresh Bootstrap Table by Creative Tim</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/fresh-bootstrap-table.css" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.13.4/dist/bootstrap-table.min.css">
+    <script src="https://unpkg.com/bootstrap-table@1.13.4/dist/bootstrap-table.min.js"></script>
+
+</head>
+<body>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header">
+                        <h4 class="card-title">List of Regisistered Users</h4>
+                    </div>
+                    <div class="wrapper">
+                        @*<div class="table-responsive">*@
+                        @*<table class="table tablesorter " id="fresh-table">*@
+                        <table id="fresh-table" class="table">
+                            <thead>
+                                <tr>
+                                    <th datafield="uid">ID</th>
+                                    <th datafield="username">User Name</th>
+                                    <th datafield="email">E-mail</th>
+                                    <th datafield="phone">Phone</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in ViewBag.userinfo)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.uid
+                                        </td>
+                                        <td>
+                                            @item.username
+                                        </td>
+                                        <td>
+                                            @item.email
+                                        </td>
+                                        <td>
+                                            @item.phone
+                                        </td>
+
+                                    </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/assets/js/jquery-1.11.2.min.js">
+        $('body').addClass('white-content');
+    </script>
+    <script type="text/javascript" src="~/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/assets/js/bootstrap-table.js"></script>
+    
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            full_screen = false;
+           
+      
+
+        $().ready(function () {
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                //showRefresh: true,
+                search: true,
+                //showToggle: true,
+                //showColumns: true,
+                pagination: true,
+                striped: true,
+                sortable: true,
+                pageSize: 10,
+                pageList: [8, 10, 25, 50, 100],
+             });
+           
+        });
+    </script>
+
+
+</body>
+
+</html>

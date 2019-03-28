@@ -1,0 +1,295 @@
+﻿@model WebApplication2.Models.filename
+<!DOCTYPE html>
+
+<html>
+
+@{
+    ViewBag.Title = "SampleDb";
+    Layout = "~/Views/Shares/_LayoutPage3.cshtml";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        Black Dashboard by Creative Tim
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="~/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="~/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/assets/demo/demo.css" rel="stylesheet" />
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+    <div class="content">
+
+        @*@using (Html.BeginForm("bulkUsers", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {*@
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="title">Import Users from csv</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <form>
+                                <div class="alert alert-success" id="updatei" style='display:none;'>
+                                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                        <i class="tim-icons icon-simple-remove"></i>
+                                    </button>
+                                    <span>
+                                        <b>Sucessfully Imported the user by csv file </b>
+                                    </span>
+                                </div>
+                                <div class="alert alert-success" id="stopi" style='display:none;'>
+                                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                        <i class="tim-icons icon-simple-remove"></i>
+                                    </button>
+                                    <span>
+                                        <b>Sucessfully Stopped the csv import </b>
+                                    </span>
+                                </div>
+                                @if (ViewBag.Message == "Success")
+                                {
+                                    <div class="alert alert-success">
+                                        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>
+                                        <span>
+                                            <b>Sucessfully Imported the user by csv file </b>
+                                        </span>
+                                    </div>
+                                }
+
+                                @if (ViewBag.Message == "Error")
+                                {
+                                    <div class="alert alert-danger">
+                                        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                            <i class="tim-icons icon-simple-remove"></i>
+                                        </button>
+                                        <span>
+                                            <b> Server not operational</b>
+                                        </span>
+                                    </div>
+                                }
+                                <div class="row">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-primary btn-file">
+                                    Browse&hellip; <input type="file" id="txtName" value="">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                   
+                                    <label id="totalRecords"></label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Total Records</th>
+                                    <th class="text-center">Saved Records</th>
+                                    <th class="text-center">Failed Records</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                   
+                                    <td class="text-center" id="totalr"></td>
+                                    <td class="text-center" id="savedr"></td>
+                                    <td class="text-center" id="failr"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                                <div class="progress-container progress-success">
+                                    <span class="progress-badge"></span>
+                                    <div class="progress">
+                                        <div id="progress1" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%; height: 10px;">
+                                            <span class="progress-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    @*<button type="submit" class="btn btn-fill btn-primary">Update</button>*@
+                                    <input type="submit" value="Update" id="Updateid" name="Command" class="btn btn-fill btn-primary" />
+                                    <input type="submit" value="Stop" id="stopid" name="Stopcmd" class="btn btn-fill btn-primary"  style='display:none;' />
+                                </div>
+</div>
+                </div>
+
+            </div>
+        @*}*@
+    </div>
+   
+    
+    <script type="text/javascript">
+       
+        $(function () {
+            var totalRecords1 = 0;
+            
+
+            $("#Updateid").click(function () {
+                var filename = new Object();
+                filename.fname = $('#txtName').val();
+                filename.Command1 = "Command1";
+
+                var Count;
+                var total;
+                if (filename != null) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/bulkUsers",
+                        data: JSON.stringify(filename),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            totalRecords1 = data.records;
+                            $("#totalr").html(totalRecords1);
+                           
+                            Count = parseInt(totalRecords1 / 100);
+                            
+                            getcount();
+                            //alert(fetch);
+                           // getDataAtOffset();
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                        
+                    });
+                }
+            });
+
+            function getcount() {
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Home/getcount",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response != null) {
+                            $("#stopid").show();
+                            $("#Updateid").attr("disabled", true);
+                            if (response.records >= 0)
+                            {
+                                
+                                $("#savedr").html(response.succesrcrds);
+                                $("#failr").html(response.failedrcrds);
+                                total = parseFloat(totalRecords1 / 100);
+                                //alert(totalRecords1, "msg1");
+                               // alert(total);
+                                //alert(response.records, "msg3");
+                                var per = parseFloat((totalRecords1 - response.records) / total);
+                              //  alert(per);
+                                var elem = document.getElementById("progress1");
+                                elem.style.width = per + '%';
+                                if (per == 100)
+                                {
+                                    $("#Updateid").removeAttr("disabled");
+                                    $("#updatei").show();
+                                    $("#stopid").hide();
+                                }
+                                getcount();
+                               
+                            }
+                            $('fname').val(response.fname);
+
+                        }
+                        else {
+                            alert("Something went wrong");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            };
+            function updateProgress() {
+                var progress = $("#progress1").progressbar("option", "value");
+                if (progress < 100) {
+                    var elem = document.getElementById("progress1");
+                    elem.style.width = 30 + '%';
+                    //Increase the value of the progress by 1
+                    $("#progress1").progressbar("option", "value", progress + 1);
+                }
+                //$("#completeCount").text(custRecordsRendered + "/" + totalRecords1 + " Records Rendered");
+            }
+            $("#stopid").click(function () {
+                var r = confirm("Press a button!");
+                if (r == true) {
+                    var filename1 = new Object();
+                    filename1.fname = $('#txtName').val();
+
+                    filename1.Command1 = "stop1";
+                    $.ajax({
+
+                        type: "POST",
+                        url: "../Home/bulkusers1",
+                        data: JSON.stringify(),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        a:function()
+                        {
+                            getcount();
+                        },
+                        success: function (data) {
+
+                            $("#Updateid").removeAttr("disabled");
+                            $("#stopi").show();
+                            $("#stopid").hide();
+                            //totalRecords1 = data.records;
+                            //$("#totalr").html(totalRecords1);
+
+                            //Count = parseInt(totalRecords1 / 100);
+
+                            //getcount();
+                            //alert(fetch);
+                            // getDataAtOffset();
+
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+
+                    });
+                }
+            });
+        });
+
+    </script>
+
+
+</body>
+
+
+</html>

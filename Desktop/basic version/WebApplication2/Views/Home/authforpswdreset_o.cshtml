@@ -1,0 +1,92 @@
+﻿@model WebApplication2.Models.Userauthtypes
+
+@{
+    ViewBag.Title = "authentication techniques";
+    //Layout = "~/Views/Shares/_LayoutPage1.cshtml";
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+    $(function () {
+        document.document.getElementsByClassName('form-group').style.visibility = 'hidden';
+
+        });</script>
+}
+
+
+<h2>@ViewBag.Title</h2>
+<body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Welcome @Context.User.Identity.Name
+            <div style="float:right; font-size: 85%; position: relative; top:-10px"> </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div id="signupbox" style="margin-top:50px" class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title"></div>
+                    <div class="danger">@ViewBag.Message</div>
+                    <div style="float:right; font-size: 85%; position: relative; top:-10px">
+                        @*<a id="signinlink" href="~/Home/Login" onclick="">Sign In</a>*@
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    @*<form id="signupform" class="form-horizontal" role="form">*@
+                    @using (Html.BeginForm("authforpswdreset", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.ValidationSummary(true, "Registeration Failed, fields.");
+                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                            <p>Error:</p>
+                            <span></span>
+                        </div>
+
+                        foreach (var mb in Model.userauthlist)
+                        {
+                            if (mb.Isenabel.Value)
+                            {
+                                <div style="margin-bottom: 25px" class="input-group">
+
+
+                                    @Html.RadioButtonFor(m => m.selecttedans, mb.Authoptions) @mb.Rblabell
+
+                                </div>
+                            }
+
+                        }
+
+
+                        <div style="margin-top:10px" class="form-group">
+                            <!-- Button -->
+
+                            <div class="col-sm-12 controls">
+                                @*<a id="btn-login" href="#" class="btn btn-success">Login  </a>*@
+                                <input type="submit" value="Next" name="Command" class="btn btn-default" />
+
+                            </div>
+                        </div>
+                        <div style="margin-top:10px" class="form-group">
+                            <!-- Button -->
+
+                            <div class="col-sm-12 controls">
+                                @*<a id="btn-login" href="#" class="btn btn-success">Login  </a>*@
+                                <input type="submit" value="Back" name="Command" class="btn btn-default" />
+
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
